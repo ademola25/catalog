@@ -1,0 +1,71 @@
+/*----body-----*/
+body {
+	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 700;
+   background-color: gray;
+	 min-height: 700px;
+}
+
+/*----message flash-----*/
+.flash {
+	text-align: center;
+	color: blue;
+	background: #cee5f5;
+}
+
+/*----nav-----*/
+.navbar-nav {
+	float: right;
+}
+/*----mainnav-----*/
+#mainNav {
+	width: 100%;
+	background: red;
+ 	border: 1px solid #ccc;
+ 	border-right: none;
+	margin-bottom: 20px;
+
+}
+
+h2 {
+  font-weight: 500;
+}
+
+.list-group-item {
+    background-color: #908ca9;
+		color:#1e2fbd;
+}
+
+.spa_name{
+	color: red;
+}
+
+.jumbotron {
+	margin-top: 60px;
+}
+
+.item_font {
+	color:blue;
+}
+
+.login_space {
+	padding: auto;
+	margin: auto;
+}
+
+.navbar-light {
+	height: 85px;
+}
+
+/*----footer-----*/
+footer {
+	border-top: 2px solid gray;
+	padding-top: 5px;
+	bottom: 0;
+	position: fixed;
+  left: 0;
+  width:100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}

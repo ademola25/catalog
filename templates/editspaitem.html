@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+{% block content %}
+
+	<div class="row">
+		<div class="col-md-9 col-md-offset-3 padding-none">
+			<h1>Edit Spa Item</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 padding-top">
+			<form action="{{url_for('editSpaItem' ,categories_id=categories_id, spa_item_id=spa_item_id, item=editedItem)}}" method = "POST">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type ="text" maxlength="100" class="form-control" name="name" value="{{item.name}}">
+        </div>
+        <div class="form-group">
+					<label for="name">Description:</label>
+					<textarea rows="5" class="form-control" name="description">{{item.description}}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="Categories">Categories:</label>
+          <select name="categories_id">
+            {% for i in categories %}
+                {% if item and item.categories_id == i.id %}
+                <option id="{{i.id}}" value="{{i.id}}" selected>{{i.name}}</option>
+                {% else %}
+                {% endif %}
+            {% endfor %}
+                <option value=1 >Reception Desk</option>
+                <option value=2 >Men Salon</option>
+                <option value=3 >Beauty Salon</option>
+                <option value=4 >Facial</option>
+                <option value=5 >Pedicure/Manicure</option>
+                <option value=6 >Massage</option>
+                <option value=7 >Lounge</option>
+                <option value=8 >Fitness Equipment Studio</option>
+                <option value=9 > Sales of Salon Materials</option>
+                <option value=10 >Laundry room</option>
+
+          </select>
+        </div>
+
+					<button type="submit" class="btn btn-default" id="submit" type="submit">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+					<button class="btn btn-default delete">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							<a href = "{{url_for('showSpaItem',categories_id=categories_id, spa_item_id=spa_item_id, item=editedItem)}}">
+							 Cancel</a> </button>
+				</div>
+			</form>
+		</div>
+
+{% endblock %}

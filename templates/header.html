@@ -1,0 +1,21 @@
+<nav class="navbar navbar-fixed-top navbar-light" id="mainNav">
+    <div class="container-fluid">
+      <div class="navbar-header">
+         <a class="navbar-brand" href="{{ url_for('showCategory') }}">
+        <img class="logo" src="{{ url_for('static', filename='spalogo.jpeg') }}"
+         alt="the Spa logo"  width="100" height="52" border="0" hspace="0" vspace="0">
+        <span>Spa Category</span></a>
+      </div>
+      <div class="navbar-nav">
+        <div class="nav navbar-nav navbar-right" id="login">
+          {%if 'username' not in session %}
+          <li><a href="{{url_for('showLogin')}}">Login </a></li>
+          {% else %}
+          {% if session.user_id %}
+          <li><a href="{{url_for('disconnect')}}">Logout: {{ session['email']}} </a></li>
+          {% endif %}
+          {% endif %}
+        </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,35 @@
+{%- extends "main.html" %}
+{% block content %}
+{% include "flash.html" %}
+
+<div class="container">
+	<div class="col-md-6">
+		<div class="row">
+					<div class="col-md-12">
+							<h3>Categories </h3>
+					</div>
+		</div>
+		<div class="list-group">
+			{% for i in category %}
+				<a href = "{{url_for('showSpaItem', categories_id = i.id)}}" class="list-group-item">{{i.name}}</a>
+			{% endfor %}
+	</div>
+</div>
+
+	<div class="col-md-6">
+			<div class="row">
+				<header class="col-md-12 section">
+					<h2 class="spaitem">{{categories.name}} </h2>
+				</header>
+			</div>
+				<ul>
+	    		{% for item in items %}
+					<li>
+						<a href = "{{url_for('showItemDetails', categories_id=categories.id, spa_item_id=item.id)}}">{{item.name}}</a>
+					</li>
+					{% endfor %}
+				</ul>
+		</div>
+</div>
+
+{% endblock %}

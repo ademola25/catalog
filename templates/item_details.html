@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "flash.html" %}
+
+<div class="row col-md-6 col-md-offset-3">
+	 <div class="itemdetails">
+		 	<div class="row">
+				<div class="col-md-9">
+        	<h2 class="spa_name">{{items.name}}</h2>
+  					</br>
+  				<h3 class="spa_name"><a href = "{{url_for('showSpaItem', categories_id=categories.id)}}"> {{categories.name}}</a></h3>
+  					</br>
+  				<p class="item_font">{{items.description}}</p>
+  					</br>
+
+      <div class="editdeletepane pull-right">
+          <a href="{{ url_for('editSpaItem', categories_id=items.categories_id, spa_item_id=items.id) }}">
+            <button class="btn btn-default edit">
+          	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            Edit </a>
+        		</button>
+
+          <a href="{{ url_for('deleteSpaItem', categories_id=items.categories_id, spa_item_id=items.id) }}">
+            <button class="btn btn-danger delete">
+          	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            Delete   </a>
+        		</button>
+
+      </div>
+		</div>
+    <div class="col-md-12"
+				{% if creator %}
+				<hr>
+				<div class="text-right">
+					Created By:  {{ creator.email }} <img src="{{ creator.picture }}" alt="creator_image" style="height: 35px;"/>
+				</div>
+				{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

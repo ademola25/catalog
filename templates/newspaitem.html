@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h1> New Spa Item </h1>
+<form action="{{url_for('newSpaItem')}}" method="POST">
+<p>Name:</p>
+<input type='text' size='30' name='name' placeholder="Item Name">
+<p>description:</p>
+<textarea name="description" rows="5" cols="30"></textarea>
+</br>
+
+<p>Categories:</p>
+  <select name="categories_id">
+    <option value=1 >Reception Desk</option>
+    <option value=2 >Men Salon</option>
+    <option value=3 >Beauty Salon</option>
+    <option value=4 >Facial</option>
+    <option value=5 >Pedicure/Manicure</option>
+    <option value=6 >Massage</option>
+    <option value=7 >Lounge</option>
+    <option value=8 >Fitness Equipment Studio</option>
+    <option value=9 > Sales of Salon Materials</option>
+    <option value=10 >Laundry room</option>
+  </select>
+  </br></br>
+<input type='submit' value='Create'>
+</br></br>
+<a href = "{{url_for('showCategory')}}"><button type="button">Cancel</button></a>
+  </br></br>
+</form>
+
+{% endblock %}

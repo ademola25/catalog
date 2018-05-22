@@ -1,0 +1,37 @@
+{%- extends "main.html" %}
+{% block content %}
+
+<div class="col-md-3 list_categories">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>
+        	<a href="{{ url_for('showCategory') }}">Spa Category</a>
+				</h2>
+			</div>
+		</div>
+	<div class="list-group">
+		{% for i in categories %}
+		<a href = "{{url_for('showSpaItem', categories_id = i.id)}}" class="list-group-item">
+			<span class=""> {{i.name}}</span>
+		</a>
+		{% endfor %}
+	</div>
+</div>
+
+<div class="col-md-9">
+	<div class="row">
+			<div class="col-md-12">
+				<h2>Latest Items</h2>
+			</div>
+	</div>
+		<div class="list-group">
+    {% for item in items %}
+			<span class="list-group-item">
+		  <a href = "{{url_for('showItemDetails', categories_id=item.categories_id, spa_item_id=item.id)}}">{{item.name}}</a>
+			 <small class="" >({{item.categories.name}})</small></span>
+		{% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}

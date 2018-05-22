@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="row col-md-6 col-md-offset-3">
+	 <div class="itemdetails">
+		 	<div class="row">
+				<div class="col-md-9">
+        <h2 class="spa_name">{{items.name}}</h2>
+  				</br>
+  			<h3 class="spa_name"><a href = "{{url_for('showSpaItem', categories_id=categories.id)}}"> {{categories.name}}</a></h3>
+  				</br>
+  			<p class="item_font">{{items.description}}</p>
+  				</br>
+				</p>
+				</div>
+			</div>
+		</div>
+</div>
+
+
+{% endblock %}
