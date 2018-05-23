@@ -34,36 +34,36 @@ To display all spa Item in Details: '/spacategory/<int:categories_id>/spaitem/JS
 
 ## References:
 
-(https://www.linuxquestions.org/questions/programming-9/flask-google-sign-in-problem-4175609886/)
+https://www.linuxquestions.org/questions/programming-9/flask-google-sign-in-problem-4175609886/
 
-(http://jinja.pocoo.org/docs/2.10/templates/#include)
+http://jinja.pocoo.org/docs/2.10/templates/#include
 
-(https://github.com/googleplus/gplus-quickstart-python/blob/master/signin.py)
+https://github.com/googleplus/gplus-quickstart-python/blob/master/signin.py
 
-(https://www.reddit.com/r/learnpython/comments/3gh7lu/keep_running_into_typeerror_int_object_is_not/)
+https://www.reddit.com/r/learnpython/comments/3gh7lu/keep_running_into_typeerror_int_object_is_not/
 
-(http://docs.sqlalchemy.org/en/latest/core/tutorial.html)
+http://docs.sqlalchemy.org/en/latest/core/tutorial.html
 
-(https://stackoverflow.com/questions/29549714/python-form-drop-down-options-populated-by-sql)
+https://stackoverflow.com/questions/29549714/python-form-drop-down-options-populated-by-sql
 
-(https://stackoverflow.com/questions/43445027/populate-dropdown-from-mysql-database-python?rq=1)
+https://stackoverflow.com/questions/43445027/populate-dropdown-from-mysql-database-python?rq=1
 
-(https://stackoverflow.com/questions/25925024/how-to-delete-items-from-database-using-a-flask-framework)
+https://stackoverflow.com/questions/25925024/how-to-delete-items-from-database-using-a-flask-framework
 
-(https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select)
+https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select
 
-(https://www.ntu.edu.sg/home/ehchua/programming/webprogramming/Python3_Flask.html#zz-3.6)
+https://www.ntu.edu.sg/home/ehchua/programming/webprogramming/Python3_Flask.html#zz-3.6
 
-(https://www.sitepoint.com/responsive-fluid-width-variable-item-navigation-css/)
+https://www.sitepoint.com/responsive-fluid-width-variable-item-navigation-css/
 
-(https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_textarea)
+https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_textarea
 
-(https://stackoverflow.com/questions/29144972/make-that-my-categories-displays-each-respective-content-isolatedly)
+https://stackoverflow.com/questions/29144972/make-that-my-categories-displays-each-respective-content-isolatedly
 
-(https://docs.python.org/3/genindex-Symbols.html)
+https://docs.python.org/3/genindex-Symbols.html
 
-(https://stackoverflow.com/questions/10407433/how-do-i-get-my-html-button-to-delete-the-right-list-item-from-a-sqlite-database)
+https://stackoverflow.com/questions/10407433/how-do-i-get-my-html-button-to-delete-the-right-list-item-from-a-sqlite-database
 
-(http://learnlayout.com/inline-block-layout.html)
+http://learnlayout.com/inline-block-layout.html
 
 
