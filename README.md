@@ -28,9 +28,26 @@ This project is run on a virutal machine created using Vagrant:
 7. `python application.py` to run the application within its directory
 8. To access Application `http://localhost:8000/spacategory` 
 
+## Uses Google Auth to authenticate users and  generating of client_secrets.json,
+
+* First Create a project on [developers.google.com](https://console.developers.google.com/), i named mine Headline Spa.
+* Go to Credentials and select "Add Credentials" click on  "OAuth (v2) token". Choose `Web`.
+* you should have `http://localhost:8000` in authorized JavaScript origins and `http://localhost:8000/gconnect` in Redirect URIs.
+* Get your client ID and client secret.
+* All this will be in the application.py file.
+
+      Generating client_secrets.json.
+ * client on the credential
+ * then click on edit,
+ * Finally click on DOWNLOAD JSON to copy..
+ * create a file named client_secrets.json and then paste DOWNLOADED JSON copied inside.
+     
 ## JSON EndPoints to view Spa Category Information
 To display all Spa Categories: /spacategory/JSON'
 To display all spa Item in Details: '/spacategory/<int:categories_id>/spaitem/JSON
+
+# License
+Project is released under the [MIT License](http://opensource.org/licenses/MIT).
 
 ## References:
 
