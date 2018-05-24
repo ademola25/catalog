@@ -22,12 +22,14 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Category in Spa Application"
 
+
 # Connecting  to the  Database and create database session
 engine = create_engine('sqlite:///spa_category.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
 
 # Create anti-forgery state token
 @app.route('/login')
@@ -37,6 +39,7 @@ def showLogin():
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
+
 
 # conecting through google plus
 @app.route('/gconnect', methods=['POST'])
@@ -91,8 +94,8 @@ def gconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
+        response = make_response(json.dumps
+        ('Current user is already connected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -125,10 +128,12 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += ' " style = "width: 300px; height: 300px;border-radius: \
+     150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
+
 
 # User Helper Functions
 def createUser(login_session):
@@ -139,9 +144,11 @@ def createUser(login_session):
     user = session.query(User).filter_by(email=login_session['email']).one()
     return user.id
 
+
 def getUserInfo(user_id):
     user = session.query(User).filter_by(id=user_id).one()
     return user
+
 
 def getUserID(email):
     try:
@@ -149,6 +156,7 @@ def getUserID(email):
         return user.id
     except:
         return None
+
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
 @app.route('/gdisconnect')
@@ -168,12 +176,10 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
     else:
-        response = make_response(json.dumps('Failed to revoke token for given user.', 400))
+        response = make_response(json.dumps('Failed to revoke token for given \
+        user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
-
-
-
 
 
 # Login required
@@ -206,6 +212,7 @@ def categoriesJSON():
     categories = session.query(Category).all()
     return jsonify(categories=[r.serialize for r in categories])
 
+
 # Show all spa categories
 @app.route('/')
 @app.route('/spacategory/')
@@ -213,20 +220,25 @@ def showCategory():
     categories = session.query(Category).all()
     items = session.query(SpaItem).order_by(SpaItem.id.desc())
     if 'username' not in login_session:
-        return render_template('publicspacategory.html', categories=categories, items=items)
+        return render_template('publicspacategory.html',
+                                categories=categories, items=items)
     else:
-        return render_template('spacategory.html', categories=categories, items=items)
+        return render_template('spacategory.html',
+                                categories=categories, items=items)
 
 
-#show spa items
+# Show spa items
 @app.route('/spacategory/<int:categories_id>/')
 @app.route('/spacategory/<int:categories_id>/spaitem/')
 def showSpaItem(categories_id):
     categories = session.query(Category).filter_by(id=categories_id).one()
     category = session.query(Category).all()
     creator = getUserInfo(categories.user_id)
-    items = session.query(SpaItem).filter_by(categories_id=categories.id).order_by(SpaItem.id.desc())
-    return render_template('publicspaitem.html', categories=categories, items=items, category=category, creator=creator)
+    items = session.query(SpaItem).filter_by(categories_id=categories.id) \
+                                             .order_by(SpaItem.id.desc())
+    return render_template('publicspaitem.html', categories=categories,
+    items=items, category=category, creator=creator)
+
 
 # READ- specifying some item from the spa items
 @app.route('/spacategories/<int:categories_id>/spaitem/<int:spa_item_id>/')
@@ -236,33 +248,42 @@ def showItemDetails(categories_id, spa_item_id):
     items = session.query(SpaItem).filter_by(id=spa_item_id).one()
     creator = getUserInfo(categories.user_id)
     if 'username' not in login_session:
-        return render_template('public_itemdetails.html', categories=categories, items=items, creator=creator)
+        return render_template('public_itemdetails.html',
+        categories=categories, items=items, creator=creator)
     else:
-        return render_template('item_details.html', categories=categories, items=items, creator=creator)
+        return render_template('item_details.html', categories=categories,
+        items=items, creator=creator)
+
 
 # create new spa item
 @app.route('/spacategory/spaitem/new', methods=['GET', 'POST'])
 @login_required
 def newSpaItem():
     if request.method == 'POST':
-            newItem = SpaItem(
-            name=request.form['name'],
-            description=request.form['description'],
-            categories_id=request.form['categories_id'],
-            user_id=login_session['user_id'])
-            session.add(newItem)
-            session.commit()
-            flash('New Spa %s Item Successfully Created' % (newItem.name))
-            return redirect(url_for('showCategory'))
+        newItem = SpaItem(
+                            name=request.form['name'],
+                            description=request.form['description'],
+                            categories_id=request.form['categories_id'],
+                            user_id=login_session['user_id'])
+        session.add(newItem)
+        session.commit()
+        flash('New Spa %s Item Successfully Created' % (newItem.name))
+        return redirect(url_for('showCategory'))
     else:
         return render_template('newspaitem.html')
+
+
 # Edit a spa item
-@app.route('/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/edit', methods=['GET', 'POST'])
+@app.route('/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/edit',
+            methods=['GET', 'POST'])
 @login_required
 def editSpaItem(categories_id, spa_item_id):
     editedItem = session.query(SpaItem).filter_by(id=spa_item_id).one()
     categories = session.query(Category).all()
-    #check if the logged in user is the owner of item
+    if editedItem.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized"\
+         "to edit this item. Please create your own item in order to edit.');"\
+         "window.location = '/';}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -271,23 +292,35 @@ def editSpaItem(categories_id, spa_item_id):
         session.add(editedItem)
         session.commit()
         flash('Spa Item Successfully Updated')
-        return redirect(url_for('showSpaItem', categories_id=categories_id, spa_item_id=spa_item_id))
+        return redirect(url_for('showSpaItem', categories_id=categories_id,
+        spa_item_id=spa_item_id))
     else:
+        return render_template('editspaitem.html', item=editedItem,
+        categories_id=categories_id, spa_item_id=spa_item_id,
+        categories=categories)
 
-        return render_template('editspaitem.html', item=editedItem, categories_id=categories_id, spa_item_id=spa_item_id, categories=categories)
+
 # Delete a spa item
-@app.route('/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/delete', methods=['GET', 'POST'])
+@app.route('/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/delete',
+            methods=['GET', 'POST'])
 @login_required
 def deleteSpaItem(categories_id, spa_item_id):
     categories = session.query(Category).filter_by(id=categories_id).one()
     itemToDelete = session.query(SpaItem).filter_by(id=spa_item_id).one()
+    if itemToDelete.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized "\
+         "to delete this item. Please create your own item in order to delete"\
+         " .');window.location = '/';}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
         flash('Spa Item Successfully Deleted')
         return redirect(url_for('showCategory', categories_id=categories_id))
     else:
-        return render_template('deleteSpaitem.html', categories_id=categories_id, spa_item_id=spa_item_id, item=itemToDelete)
+        return render_template('deleteSpaitem.html',
+        categories_id=categories_id, spa_item_id=spa_item_id,
+        item=itemToDelete)
+
 
 # Disconnect from Google
 @app.route('/disconnect')
@@ -307,7 +340,6 @@ def disconnect():
     else:
         flash("You were not logged in")
         return redirect(url_for('showCategory'))
-
 
 
 if __name__ == '__main__':

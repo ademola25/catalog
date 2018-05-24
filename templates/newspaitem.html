@@ -2,9 +2,10 @@
 {% block content %}
 
 <h1> New Spa Item </h1>
-<form action="{{url_for('newSpaItem')}}" method="POST">
+<form action="{{url_for('newSpaItem')}}" name="myForm" onsubmit="return validateForm()" method="POST">
+
 <p>Name:</p>
-<input type='text' size='30' name='name' placeholder="Item Name">
+<input type='text' size='30' name="name" required>
 <p>description:</p>
 <textarea name="description" rows="5" cols="30"></textarea>
 </br>
@@ -28,5 +29,7 @@
 <a href = "{{url_for('showCategory')}}"><button type="button">Cancel</button></a>
   </br></br>
 </form>
+
+
 
 {% endblock %}
