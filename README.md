@@ -43,8 +43,8 @@ This project is run on a virutal machine created using Vagrant:
  * create a file named client_secrets.json and then paste DOWNLOADED JSON copied inside.
      
 ## JSON EndPoints to view Spa Category Information
-To display all Spa Categories: /spacategory/JSON'
-To display all spa Item in Details: '/spacategory/<int:categories_id>/spaitem/JSON
+ * To display all Spa Categories:   /spacategory/JSON'
+ * To display all spa Item in Details: /spacategory/<int:categories_id>/spaitem/JSON
 
 # License
 Project is released under the [MIT License](http://opensource.org/licenses/MIT).
