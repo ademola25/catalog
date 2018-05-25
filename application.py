@@ -94,8 +94,8 @@ def gconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps
-        ('Current user is already connected.'), 200)
+        response = make_response(
+            json.dumps('Current user is already connected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -220,11 +220,14 @@ def showCategory():
     categories = session.query(Category).all()
     items = session.query(SpaItem).order_by(SpaItem.id.desc())
     if 'username' not in login_session:
-        return render_template('publicspacategory.html',
-                                categories=categories, items=items)
+        return render_template(
+            'publicspacategory.html',
+            categories=categories, items=items)
     else:
-        return render_template('spacategory.html',
-                                categories=categories, items=items)
+        return render_template(
+            'spacategory.html',
+            categories=categories,
+            items=items)
 
 
 # Show spa items
@@ -234,10 +237,12 @@ def showSpaItem(categories_id):
     categories = session.query(Category).filter_by(id=categories_id).one()
     category = session.query(Category).all()
     creator = getUserInfo(categories.user_id)
-    items = session.query(SpaItem).filter_by(categories_id=categories.id) \
-                                             .order_by(SpaItem.id.desc())
-    return render_template('publicspaitem.html', categories=categories,
-    items=items, category=category, creator=creator)
+    items = session.query(SpaItem).filter_by(
+        categories_id=categories.id).order_by(SpaItem.id.desc())
+    return render_template(
+            'publicspaitem.html',
+            categories=categories, items=items,
+            category=category, creator=creator)
 
 
 # READ- specifying some item from the spa items
@@ -248,11 +253,15 @@ def showItemDetails(categories_id, spa_item_id):
     items = session.query(SpaItem).filter_by(id=spa_item_id).one()
     creator = getUserInfo(categories.user_id)
     if 'username' not in login_session:
-        return render_template('public_itemdetails.html',
-        categories=categories, items=items, creator=creator)
+        return render_template(
+            'public_itemdetails.html',
+            categories=categories,
+            items=items, creator=creator)
     else:
-        return render_template('item_details.html', categories=categories,
-        items=items, creator=creator)
+        return render_template(
+            'item_details.html',
+            categories=categories,
+            items=items, creator=creator)
 
 
 # create new spa item
@@ -274,8 +283,9 @@ def newSpaItem():
 
 
 # Edit a spa item
-@app.route('/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/edit',
-            methods=['GET', 'POST'])
+@app.route(
+    '/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/edit',
+    methods=['GET', 'POST'])
 @login_required
 def editSpaItem(categories_id, spa_item_id):
     editedItem = session.query(SpaItem).filter_by(id=spa_item_id).one()
@@ -292,17 +302,21 @@ def editSpaItem(categories_id, spa_item_id):
         session.add(editedItem)
         session.commit()
         flash('Spa Item Successfully Updated')
-        return redirect(url_for('showSpaItem', categories_id=categories_id,
-        spa_item_id=spa_item_id))
+        return redirect(url_for(
+            'showSpaItem', categories_id=categories_id,
+            spa_item_id=spa_item_id))
     else:
-        return render_template('editspaitem.html', item=editedItem,
-        categories_id=categories_id, spa_item_id=spa_item_id,
-        categories=categories)
+        return render_template(
+            'editspaitem.html', item=editedItem,
+            categories_id=categories_id,
+            spa_item_id=spa_item_id,
+            categories=categories)
 
 
 # Delete a spa item
-@app.route('/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/delete',
-            methods=['GET', 'POST'])
+@app.route(
+    '/spacategory/<int:categories_id>/spaitem/<int:spa_item_id>/delete',
+    methods=['GET', 'POST'])
 @login_required
 def deleteSpaItem(categories_id, spa_item_id):
     categories = session.query(Category).filter_by(id=categories_id).one()
@@ -317,9 +331,9 @@ def deleteSpaItem(categories_id, spa_item_id):
         flash('Spa Item Successfully Deleted')
         return redirect(url_for('showCategory', categories_id=categories_id))
     else:
-        return render_template('deleteSpaitem.html',
-        categories_id=categories_id, spa_item_id=spa_item_id,
-        item=itemToDelete)
+        return render_template(
+            'deleteSpaitem.html', categories_id=categories_id,
+            spa_item_id=spa_item_id, item=itemToDelete)
 
 
 # Disconnect from Google
